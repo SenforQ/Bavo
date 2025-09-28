@@ -1,0 +1,67 @@
+{
+  "characters": [
+    {
+      "RavoNickName": "Alex",
+      "RavoUserIcon": "assets/dubbingAI/dubbingAI_1_cover.webp",
+      "RavoShowPhoto": "assets/dubbingAI/dubbingAI_1_cover.webp",
+      "RavoShowMotto": "Passionate storyteller bringing characters to life through voice acting. Love exploring emotions and creating immersive narratives.",
+      "RavoShowFollowNum": 7,
+      "RavoShowLike": 12,
+      "RavoShowSayhi": "Hey there! Ready to dive into an amazing story together? I'm Alex, your voice acting companion!"
+    },
+    {
+      "RavoNickName": "Luna",
+      "RavoUserIcon": "assets/dubbingAI/dubbingAI_2_cover.webp",
+      "RavoShowPhoto": "assets/dubbingAI/dubbingAI_2_cover.webp",
+      "RavoShowMotto": "Thoughtful narrator specializing in philosophical stories. My voice carries wisdom and depth that captivates listeners.",
+      "RavoShowFollowNum": 5,
+      "RavoShowLike": 9,
+      "RavoShowSayhi": "Hello, dear listener. I'm Luna, here to share profound stories that touch the soul. Shall we begin our journey?"
+    },
+    {
+      "RavoNickName": "Zoe",
+      "RavoUserIcon": "assets/dubbingAI/dubbingAI_3_cover.webp",
+      "RavoShowPhoto": "assets/dubbingAI/dubbingAI_3_cover.webp",
+      "RavoShowMotto": "Energetic performer bringing joy through animated storytelling. My vibrant personality shines in every character I voice.",
+      "RavoShowFollowNum": 8,
+      "RavoShowLike": 14,
+      "RavoShowSayhi": "Hi there! I'm Zoe, your energetic storyteller! Ready for some fun adventures and exciting tales? Let's go!"
+    },
+    {
+      "RavoNickName": "Sage",
+      "RavoUserIcon": "assets/dubbingAI/dubbingAI_4_cover.webp",
+      "RavoShowPhoto": "assets/dubbingAI/dubbingAI_4_cover.webp",
+      "RavoShowMotto": "Strategic storyteller crafting complex narratives with precision. My analytical mind creates compelling plot structures.",
+      "RavoShowFollowNum": 4,
+      "RavoShowLike": 7,
+      "RavoShowSayhi": "Greetings. I'm Sage, master of intricate tales. Prepare for stories that challenge your mind and captivate your imagination."
+    },
+    {
+      "RavoNickName": "Blaze",
+      "RavoUserIcon": "assets/dubbingAI/dubbingAI_5_cover.webp",
+      "RavoShowPhoto": "assets/dubbingAI/dubbingAI_5_cover.webp",
+      "RavoShowMotto": "Dynamic voice actor thriving on action-packed stories. My confident delivery brings excitement to every performance.",
+      "RavoShowFollowNum": 9,
+      "RavoShowLike": 15,
+      "RavoShowSayhi": "Hey! I'm Blaze, your action hero narrator! Ready for epic adventures and thrilling tales? Let's make it legendary!"
+    },
+    {
+      "RavoNickName": "Maya",
+      "RavoUserIcon": "assets/dubbingAI/dubbingAI_6_cover.webp",
+      "RavoShowPhoto": "assets/dubbingAI/dubbingAI_6_cover.webp",
+      "RavoShowMotto": "Creative soul expressing emotions through gentle storytelling. My sensitive approach creates intimate connections with audience.",
+      "RavoShowFollowNum": 6,
+      "RavoShowLike": 11,
+      "RavoShowSayhi": "Hello, beautiful soul. I'm Maya, here to share heartfelt stories that warm your heart. Ready for something special?"
+    },
+    {
+      "RavoNickName": "Nova",
+      "RavoUserIcon": "assets/dubbingAI/dubbingAI_7_cover.webp",
+      "RavoShowPhoto": "assets/dubbingAI/dubbingAI_7_cover.webp",
+      "RavoShowMotto": "Innovative narrator exploring unconventional storylines. My quick wit and humor make every tale engaging and memorable.",
+      "RavoShowFollowNum": 10,
+      "RavoShowLike": 13,
+      "RavoShowSayhi": "Hey there, curious mind! I'm Nova, your quirky storyteller! Ready for some wild, unexpected adventures? Let's get weird!"
+    }
+  ]
+}

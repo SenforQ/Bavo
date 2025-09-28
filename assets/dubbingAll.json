@@ -1,0 +1,96 @@
+{
+  "characters": [
+    {
+      "RavoNickName": "Luna",
+      "RavoUserIcon": "assets/dubbingFemale/1/dubbingFemale_1_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingFemale/1/dubbingFemale_1_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingFemale/1/dubbingFemale_1_photo1.webp",
+        "assets/dubbingFemale/1/dubbingFemale_1_photo2.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingFemale/1/dubbingFemale_1_voice.mp3",
+      "RavoShowMotto": "Gentle voice with a touch of mystery, bringing stories to life with emotional depth and captivating charm.",
+      "RavoShowFollowNum": 8,
+      "RavoShowLike": 15,
+      "RavoShowSayhi": "Hello there! I'm Luna, your enchanting storyteller. Ready to embark on a magical journey together?",
+      "RavoGender": "female"
+    },
+    {
+      "RavoNickName": "Zoe",
+      "RavoUserIcon": "assets/dubbingFemale/2/dubbingFemale_2_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingFemale/2/dubbingFemale_2_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingFemale/2/dubbingFemale_2_photo1.webp",
+        "assets/dubbingFemale/2/dubbingFemale_2_photo2.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingFemale/2/dubbingFemale_2_voice.mp3",
+      "RavoShowMotto": "Energetic and vibrant performer who brings joy and excitement to every story with her dynamic voice.",
+      "RavoShowFollowNum": 12,
+      "RavoShowLike": 22,
+      "RavoShowSayhi": "Hey there! I'm Zoe, your energetic storyteller! Ready for some fun adventures and exciting tales? Let's go!",
+      "RavoGender": "female"
+    },
+    {
+      "RavoNickName": "Freya",
+      "RavoUserIcon": "assets/dubbingFemale/3/dubbingFemale_3_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingFemale/3/dubbingFemale_3_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingFemale/3/dubbingFemale_3_photo1.webp",
+        "assets/dubbingFemale/3/dubbingFemale_3_photo2.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingFemale/3/dubbingFemale_3_voice.mp3",
+      "RavoShowMotto": "Mystical narrator with a voice that carries ancient wisdom and modern grace, perfect for fantasy and adventure tales.",
+      "RavoShowFollowNum": 6,
+      "RavoShowLike": 18,
+      "RavoShowSayhi": "Greetings, dear listener. I am Freya, keeper of ancient stories and modern dreams. Shall we explore together?",
+      "RavoGender": "female"
+    },
+    {
+      "RavoNickName": "Rachel",
+      "RavoUserIcon": "assets/dubbingFemale/4/dubbingFemale_4_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingFemale/4/dubbingFemale_4_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingFemale/4/dubbingFemale_4_photo1.webp",
+        "assets/dubbingFemale/4/dubbingFemale_4_photo2.webp",
+        "assets/dubbingFemale/4/dubbingFemale_4_photo3.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingFemale/4/dubbingFemale_4_voice.mp3",
+      "RavoShowMotto": "Professional voice artist with a warm, approachable tone, specializing in educational and inspirational content.",
+      "RavoShowFollowNum": 15,
+      "RavoShowLike": 28,
+      "RavoShowSayhi": "Hi! I'm Rachel, your friendly voice companion. Let's create something amazing together with stories that inspire and educate!",
+      "RavoGender": "female"
+    },
+    {
+      "RavoNickName": "Curt",
+      "RavoUserIcon": "assets/dubbingMale/1/dubbingMale_1_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingMale/1/dubbingMale_1_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingMale/1/dubbingMale_1_photo1.webp",
+        "assets/dubbingMale/1/dubbingMale_1_photo2.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingMale/1/dubbingMale_1_voice.mp3",
+      "RavoShowMotto": "Cosmic storyteller with a deep, resonant voice that brings space adventures and sci-fi tales to life with authenticity.",
+      "RavoShowFollowNum": 9,
+      "RavoShowLike": 19,
+      "RavoShowSayhi": "Hey there, space traveler! I'm Curt, your cosmic storyteller. Ready to explore the universe through amazing tales?",
+      "RavoGender": "male"
+    },
+    {
+      "RavoNickName": "Patrick",
+      "RavoUserIcon": "assets/dubbingMale/2/dubbingMale_2_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingMale/2/dubbingMale_2_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingMale/2/dubbingMale_2_photo1.webp",
+        "assets/dubbingMale/2/dubbingMale_2_photo2.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingMale/2/dubbingMale_2_voice.mp3",
+      "RavoShowMotto": "Versatile voice actor with a smooth, professional delivery, perfect for business presentations and dramatic narratives.",
+      "RavoShowFollowNum": 11,
+      "RavoShowLike": 24,
+      "RavoShowSayhi": "Hello! I'm Patrick, your professional voice partner. Let's create compelling stories that engage and inspire your audience!",
+      "RavoGender": "male"
+    }
+  ]
+}
+

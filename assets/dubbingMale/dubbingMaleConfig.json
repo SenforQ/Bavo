@@ -1,0 +1,33 @@
+{
+  "characters": [
+    {
+      "RavoNickName": "Curt",
+      "RavoUserIcon": "assets/dubbingMale/1/dubbingMale_1_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingMale/1/dubbingMale_1_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingMale/1/dubbingMale_1_photo1.webp",
+        "assets/dubbingMale/1/dubbingMale_1_photo2.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingMale/1/dubbingMale_1_voice.mp3",
+      "RavoShowMotto": "Cosmic storyteller with a deep, resonant voice that brings space adventures and sci-fi tales to life with authenticity.",
+      "RavoShowFollowNum": 9,
+      "RavoShowLike": 19,
+      "RavoShowSayhi": "Hey there, space traveler! I'm Curt, your cosmic storyteller. Ready to explore the universe through amazing tales?"
+    },
+    {
+      "RavoNickName": "Patrick",
+      "RavoUserIcon": "assets/dubbingMale/2/dubbingMale_2_avatar.webp",
+      "RavoShowPhoto": "assets/dubbingMale/2/dubbingMale_2_photo1.webp",
+      "RavoShowPhotoArray": [
+        "assets/dubbingMale/2/dubbingMale_2_photo1.webp",
+        "assets/dubbingMale/2/dubbingMale_2_photo2.webp"
+      ],
+      "RavoPlayMusic": "assets/dubbingMale/2/dubbingMale_2_voice.mp3",
+      "RavoShowMotto": "Versatile voice actor with a smooth, professional delivery, perfect for business presentations and dramatic narratives.",
+      "RavoShowFollowNum": 11,
+      "RavoShowLike": 24,
+      "RavoShowSayhi": "Hello! I'm Patrick, your professional voice partner. Let's create compelling stories that engage and inspire your audience!"
+    }
+  ]
+}
+
