@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import '../services/user_info_service.dart';
+import '../services/vip_service.dart';
 import 'privacy_page.dart';
 import 'terms_page.dart';
 import 'about_us_page.dart';
 import 'setting_page.dart';
+import 'voice_sumbit_page.dart';
+import 'vip_sub_page.dart';
+import 'wallet_detail_page.dart';
 
 class Tab4MinePage extends StatefulWidget {
   const Tab4MinePage({super.key});
@@ -19,11 +23,16 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
   String _userGender = '';
   String _avatarPath = 'assets/user_defalut_icon.webp';
   String _backgroundPath = 'assets/mine_top_bg.webp';
+  
+  // VIP 状态
+  bool _isVipActive = false;
+  int _vipRemainingDays = 0;
 
   @override
   void initState() {
     super.initState();
     _loadUserInfo();
+    _loadVipStatus();
   }
 
   Future<void> _loadUserInfo() async {
@@ -38,6 +47,30 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
       });
     } catch (e) {
       // 如果加载失败，使用默认值
+    }
+  }
+
+  Future<void> _loadVipStatus() async {
+    try {
+      final isActive = await VipService.isVipActive();
+      final isExpired = await VipService.isVipExpired();
+      final remainingDays = await VipService.getVipRemainingDays();
+      
+      setState(() {
+        _isVipActive = isActive && !isExpired;
+        _vipRemainingDays = remainingDays;
+      });
+      
+      // 如果VIP已过期，自动停用
+      if (isActive && isExpired) {
+        await VipService.deactivateVip();
+        setState(() {
+          _isVipActive = false;
+          _vipRemainingDays = 0;
+        });
+      }
+    } catch (e) {
+      print('Tab4MinePage - Error loading VIP status: $e');
     }
   }
 
@@ -82,7 +115,7 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
 
   Widget _buildTopSection(BuildContext context) {
     return SizedBox(
-      height: 280,
+      height: 320, // 增加高度以容纳 VIP 状态显示
       child: Stack(
         children: [
           // 背景图片
@@ -140,8 +173,9 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min, // 使用 min 避免溢出
               children: [
-                const SizedBox(height: 66),
+                const SizedBox(height: 50), // 减少顶部间距
                 // 用户头像
                 Container(
                   width: 100,
@@ -198,7 +232,7 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
                           ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12), // 减少间距
                 // 用户名和性别图标
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -229,7 +263,7 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
                     ],
                   ],
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6), // 减少间距
                 // 用户描述
                 Text(
                   _userSignature,
@@ -239,6 +273,78 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
+                const SizedBox(height: 8), // 减少间距
+                // VIP 状态显示
+                if (_isVipActive) ...[
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFFFFD700).withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.workspace_premium,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          _vipRemainingDays > 0 
+                            ? 'VIP Active - $_vipRemainingDays days left'
+                            : 'VIP Active',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ] else ...[
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.3),
+                        width: 1,
+                      ),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.lock_outline,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        SizedBox(width: 6),
+                        Text(
+                          'Upgrade to VIP',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -251,46 +357,132 @@ class _Tab4MinePageState extends State<Tab4MinePage> {
   Widget _buildMenuSection(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
       child: Column(
         children: [
-          const SizedBox(height: 20),
-          // _buildMenuItem(Icons.account_balance_wallet, 'Wallet'),
-          // _buildDivider(),
-          _buildMenuItem('assets/me_privacy_policy.webp', 'Privacy Policy', () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const PrivacyPage()),
-            );
-          }),
-          _buildDivider(),
-          _buildMenuItem('assets/me_setting.webp', 'Settings', () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => SettingPage(
-                  onUserInfoUpdated: _updateUserInfo,
+          // 横幅图片区域
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                // me_banner_sumbit.webp 横幅
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const VoiceSubmitPage()),
+                    );
+                  },
+                  child: Container(
+                    width: 335,
+                    height: 95,
+                    margin: const EdgeInsets.only(bottom: 12),
+                    child: Image.asset(
+                      'assets/me_banner_sumbit.webp',
+                      width: 335,
+                      height: 95,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 335,
+                          height: 95,
+                          color: Colors.grey[300],
+                          child: const Icon(
+                            Icons.image_not_supported,
+                            color: Colors.grey,
+                            size: 40,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            );
-          }),
-          _buildDivider(),
-          _buildMenuItem('assets/me_about_us.webp', 'About Us', () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AboutUsPage()),
-            );
-          }),
-          _buildDivider(),
-          _buildMenuItem('assets/me_user_agreement.webp', 'User Agreement', () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const TermsPage()),
-            );
-          }),
+                // me_sub_vip.webp 横幅
+                GestureDetector(
+                  onTap: () async {
+                    final result = await Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const VipSubPage()),
+                    );
+                    
+                    // 如果购买成功，重新加载VIP状态
+                    if (result != null && result['vip_activated'] == true) {
+                      _loadVipStatus();
+                    }
+                  },
+                  child: Container(
+                    width: 335,
+                    height: 68,
+                    child: Image.asset(
+                      'assets/me_sub_vip.webp',
+                      width: 335,
+                      height: 68,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 335,
+                          height: 68,
+                          color: Colors.grey[300],
+                          child: const Icon(
+                            Icons.image_not_supported,
+                            color: Colors.grey,
+                            size: 40,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(height: 20),
+          // 菜单列表容器
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                _buildMenuItem('assets/me_wallet.webp', 'Wallet', () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const WalletDetailPage()),
+                  );
+                }),
+                _buildDivider(),
+                _buildMenuItem('assets/me_privacy_policy.webp', 'Privacy Policy', () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const PrivacyPage()),
+                  );
+                }),
+                _buildDivider(),
+                _buildMenuItem('assets/me_setting.webp', 'Settings', () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SettingPage(
+                        onUserInfoUpdated: _updateUserInfo,
+                      ),
+                    ),
+                  );
+                }),
+                _buildDivider(),
+                _buildMenuItem('assets/me_about_us.webp', 'About Us', () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const AboutUsPage()),
+                  );
+                }),
+                _buildDivider(),
+                _buildMenuItem('assets/me_user_agreement.webp', 'User Agreement', () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const TermsPage()),
+                  );
+                }),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
         ],
       ),
     );

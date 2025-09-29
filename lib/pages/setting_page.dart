@@ -3,7 +3,9 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../models/user_info.dart';
 import '../services/user_info_service.dart';
+import '../services/vip_service.dart';
 import '../widgets/ios_alert.dart';
+import 'vip_sub_page.dart';
 
 class SettingPage extends StatefulWidget {
   final Function(String name, String signature, String gender, String avatarPath, String backgroundPath)? onUserInfoUpdated;
@@ -458,6 +460,19 @@ class _SettingPageState extends State<SettingPage> {
 
   Future<void> _saveChanges() async {
     try {
+      // 检查 VIP 权限
+      final isVipActive = await VipService.isVipActive();
+      final isVipExpired = await VipService.isVipExpired();
+      final hasVipPermission = isVipActive && !isVipExpired;
+      
+      if (!hasVipPermission) {
+        // 显示 VIP 权限不足的提示
+        if (mounted) {
+          _showVipRequiredDialog();
+        }
+        return;
+      }
+      
       // 获取当前输入的数据
       final name = _nameController.text.trim();
       final signature = _signatureController.text.trim();
@@ -503,6 +518,90 @@ class _SettingPageState extends State<SettingPage> {
         IOSAlert.showError(context, 'Error saving settings: $e');
       }
     }
+  }
+
+  void _showVipRequiredDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(
+                Icons.workspace_premium,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 12),
+            const Text(
+              'VIP Required',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF333333),
+              ),
+            ),
+          ],
+        ),
+        content: const Text(
+          'You need VIP access to save settings. Upgrade to VIP to unlock all features and customize your profile.',
+          style: TextStyle(
+            fontSize: 16,
+            color: Color(0xFF666666),
+            height: 1.4,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(
+                color: Color(0xFF666666),
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // 跳转到 VIP 订阅页面
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const VipSubPage()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF80FED6),
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            ),
+            child: const Text(
+              'Upgrade to VIP',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
 

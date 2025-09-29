@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dubbing_chat_detail_page.dart';
 import 'report_detail_page.dart';
+import 'wallet_detail_page.dart';
 import '../services/character_filter_service.dart';
+import '../services/coin_service.dart';
 
 class DubbingAIDetailPage extends StatefulWidget {
   final Map<String, dynamic> character;
@@ -24,13 +26,35 @@ class _DubbingAIDetailPageState extends State<DubbingAIDetailPage> {
   bool _isLiked = false;
   int _followCount = 0;
   int _likeCount = 0;
+  bool _isLocked = false;
+  int _currentCoins = 0;
 
   @override
   void initState() {
     super.initState();
     _followCount = widget.character['RavoShowFollowNum'] ?? 0;
     _likeCount = widget.character['RavoShowLike'] ?? 0;
+    _checkIfLocked();
     _loadUserInteractions();
+    _loadCoins();
+  }
+
+  void _checkIfLocked() {
+    // 根据角色名称判断是否需要解锁
+    // 根据 dubbingAIConfig.json，后面3个角色需要解锁：Sage, Blaze, Maya, Nova
+    final characterName = widget.character['RavoNickName'] ?? '';
+    final lockedCharacters = ['Sage', 'Blaze', 'Maya', 'Nova'];
+    
+    setState(() {
+      _isLocked = lockedCharacters.contains(characterName);
+    });
+  }
+
+  Future<void> _loadCoins() async {
+    final coins = await CoinService.getCurrentCoins();
+    setState(() {
+      _currentCoins = coins;
+    });
   }
 
   Future<void> _loadUserInteractions() async {
@@ -248,41 +272,89 @@ class _DubbingAIDetailPageState extends State<DubbingAIDetailPage> {
             child: Container(
               padding: const EdgeInsets.all(24),
               child: Center(
-                child: GestureDetector(
-                  onTap: () {
-                    // 跳转到AI聊天页面
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => DubbingChatDetailPage(character: widget.character),
-                      ),
-                    );
-                  },
-                  child: Image.asset(
-                    'assets/dubbing_ai_voice.webp',
-                    width: 290,
-                    height: 73,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
+                child: Stack(
+                  children: [
+                    GestureDetector(
+                      onTap: _isLocked ? _showUnlockDialog : () {
+                        // 跳转到AI聊天页面
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DubbingChatDetailPage(character: widget.character),
+                          ),
+                        );
+                      },
+                      child: Image.asset(
+                        'assets/dubbing_ai_voice.webp',
                         width: 290,
                         height: 73,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF80FED6),
-                          borderRadius: BorderRadius.circular(28),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Start Dubbing',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            width: 290,
+                            height: 73,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF80FED6),
+                              borderRadius: BorderRadius.circular(28),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Start Dubbing',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    // 锁定遮罩
+                    if (_isLocked)
+                      Positioned.fill(
+                        child: GestureDetector(
+                          onTap: _showUnlockDialog,
+                          child: Container(
+                            width: 290,
+                            height: 73,
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(28),
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/wallet_coin.webp',
+                                    width: 24,
+                                    height: 16,
+                                    fit: BoxFit.contain,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Icon(
+                                        Icons.monetization_on,
+                                        color: Color(0xFFFFD700),
+                                        size: 24,
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    '1000',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                  ],
                 ),
               ),
             ),
@@ -513,6 +585,394 @@ class _DubbingAIDetailPageState extends State<DubbingAIDetailPage> {
         ),
       ),
     );
+  }
+
+  void _showUnlockDialog() {
+    // 先检查金币是否足够
+    if (_currentCoins < 1000) {
+      _showInsufficientCoinsDialog();
+      return;
+    }
+    
+    // 金币足够，显示二次确认对话框
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Row(
+            children: [
+              Image.asset(
+                'assets/wallet_coin.webp',
+                width: 24,
+                height: 16,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(
+                    Icons.monetization_on,
+                    color: Color(0xFFFFD700),
+                    size: 24,
+                  );
+                },
+              ),
+              const SizedBox(width: 8),
+              const Text(
+                'Confirm Unlock',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Are you sure you want to unlock ${widget.character['RavoNickName']}?',
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'This will cost 1000 coins and cannot be undone.',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF0F8F0),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Your coins: ',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    Text(
+                      '$_currentCoins',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF87A156),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Color(0xFF999999),
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _unlockCharacter();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF80FED6),
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text(
+                'Confirm Unlock',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showInsufficientCoinsDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(
+                  Icons.warning_amber_rounded,
+                  color: Colors.orange,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Text(
+                'Insufficient Coins',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'You need 1000 coins to unlock ${widget.character['RavoNickName']}, but you only have $_currentCoins coins.',
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.orange.withOpacity(0.3),
+                    width: 1,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.info_outline,
+                      color: Colors.orange,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Visit Wallet to purchase more coins',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.orange,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Color(0xFF999999),
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _navigateToWallet();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF80FED6),
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text(
+                'Go to Wallet',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _navigateToWallet() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const WalletDetailPage(),
+      ),
+    ).then((_) {
+      // 从钱包页面返回后，重新加载金币数量
+      _loadCoins();
+    });
+  }
+
+  Future<void> _unlockCharacter() async {
+    try {
+      // 消费 1000 金币
+      final success = await CoinService.spendCoins(1000);
+      
+      if (success) {
+        // 解锁成功，更新状态
+        setState(() {
+          _isLocked = false;
+          _currentCoins -= 1000;
+        });
+        
+        // 显示成功提示
+        if (mounted) {
+          showDialog(
+            context: context,
+            barrierDismissible: true,
+            barrierColor: Colors.black.withOpacity(0.3),
+            builder: (context) => Center(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Text(
+                  '${widget.character['RavoNickName']} unlocked successfully!',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          );
+
+          Future.delayed(const Duration(seconds: 2), () {
+            if (mounted && Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          });
+        }
+      } else {
+        // 金币不足
+        if (mounted) {
+          showDialog(
+            context: context,
+            barrierDismissible: true,
+            barrierColor: Colors.black.withOpacity(0.3),
+            builder: (context) => Center(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  'Not enough coins!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          );
+
+          Future.delayed(const Duration(seconds: 2), () {
+            if (mounted && Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          });
+        }
+      }
+    } catch (e) {
+      // 解锁失败
+      if (mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          barrierColor: Colors.black.withOpacity(0.3),
+          builder: (context) => Center(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: const Text(
+                'Unlock failed. Please try again.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        );
+
+        Future.delayed(const Duration(seconds: 2), () {
+          if (mounted && Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();
+          }
+        });
+      }
+    }
   }
 
   Widget _buildCapsuleButton(String label, String value, IconData icon, bool isActive, VoidCallback onTap) {
