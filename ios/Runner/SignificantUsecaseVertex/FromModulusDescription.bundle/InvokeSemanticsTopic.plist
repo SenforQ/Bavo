@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>activatedEffectLeft</key>
+	<string>cupertinoContainMediator</string>
+	<key>coordinatorIncludeContext</key>
+	<string>customizedCollectionTension</string>
+	<key>momentumOutsideObserver</key>
+	<string>scrollWithoutState</string>
+	<key>queryWithoutCommand</key>
+	<string>accessibleTableTransparency</string>
+	<key>resourceInterpreterBottom</key>
+	<string>clipperProcessTint</string>
+	<key>routeFunctionDensity</key>
+	<string>menuWithMediator</string>
+</dict>
+</plist>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>callbackInterpreterDepth</key>
+	<string>delegatePlatformBehavior</string>
+	<key>documentOfFramework</key>
+	<string>singletonShapeOpacity</string>
+	<key>intuitiveConfigurationCoord</key>
+	<string>routerStagePadding</string>
+	<key>layerSinceForm</key>
+	<string>sizedboxBufferTail</string>
+</dict>
+</plist>

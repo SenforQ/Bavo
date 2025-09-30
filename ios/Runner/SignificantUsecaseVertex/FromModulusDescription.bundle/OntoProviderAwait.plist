@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>asyncKindStatus</key>
+	<string>instructionParameterBrightness</string>
+	<key>disabledRouteRotation</key>
+	<string>mapPhaseTop</string>
+	<key>globalOffsetDelay</key>
+	<string>sinkVisitorBrightness</string>
+	<key>lostMapBrightness</key>
+	<string>sensorOperationMomentum</string>
+	<key>paddingBySingleton</key>
+	<string>equalizationCycleTag</string>
+	<key>particleMethodTransparency</key>
+	<string>reusableConfigurationTint</string>
+	<key>presenterActionType</key>
+	<string>dependencyKindOpacity</string>
+	<key>promiseAroundForm</key>
+	<string>reductionChainTag</string>
+	<key>sampleMediatorAppearance</key>
+	<string>relationalReferenceVelocity</string>
+	<key>sharedSensorScale</key>
+	<string>imageMediatorCoord</string>
+</dict>
+</plist>

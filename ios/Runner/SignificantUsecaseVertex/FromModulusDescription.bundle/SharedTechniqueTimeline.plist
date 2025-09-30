@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>clipperStrategyBehavior</key>
+	<string>enabledCanvasResponse</string>
+	<key>constraintByContext</key>
+	<string>sineModeResponse</string>
+	<key>directFactoryAcceleration</key>
+	<string>rectBesideFacade</string>
+	<key>imageMethodSaturation</key>
+	<string>normalDelegateCount</string>
+	<key>interfaceDuringBuffer</key>
+	<string>resultViaMethod</string>
+	<key>localizationByFacade</key>
+	<string>delicateWidgetInset</string>
+	<key>mediocreNodeBottom</key>
+	<string>offsetOperationMargin</string>
+	<key>popupAgainstForm</key>
+	<string>previewActivityHue</string>
+</dict>
+</plist>

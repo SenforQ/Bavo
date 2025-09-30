@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>asyncFormBehavior</key>
+	<string>nativeErrorSpacing</string>
+	<key>customInteractorKind</key>
+	<string>switchViaChain</string>
+	<key>giftSinceJob</key>
+	<string>statefulInsideValue</string>
+	<key>hierarchicalFutureStyle</key>
+	<string>observerInSingleton</string>
+	<key>navigationTypeInset</key>
+	<string>parallelLayoutAppearance</string>
+	<key>signIncludeEnvironment</key>
+	<string>routeVarMargin</string>
+</dict>
+</plist>

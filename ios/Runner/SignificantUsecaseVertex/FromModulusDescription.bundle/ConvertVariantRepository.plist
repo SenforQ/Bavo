@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>activatedRadiusPosition</key>
+	<string>associatedPositionKind</string>
+	<key>chapterSystemDepth</key>
+	<string>draggableScreenShape</string>
+	<key>enabledRowHead</key>
+	<string>widgetVisitorSpeed</string>
+	<key>fixedDurationResponse</key>
+	<string>smartModelTop</string>
+	<key>handlerPerLevel</key>
+	<string>taskMediatorInset</string>
+	<key>nibSinceCycle</key>
+	<string>signatureDuringStyle</string>
+	<key>unaryOrMemento</key>
+	<string>previewAtAdapter</string>
+</dict>
+</plist>

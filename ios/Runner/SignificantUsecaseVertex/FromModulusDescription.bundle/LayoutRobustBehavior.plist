@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>accordionErrorStyle</key>
+	<string>nibTempleTag</string>
+	<key>actionParameterBrightness</key>
+	<string>viewWithLevel</string>
+	<key>geometricIndicatorStatus</key>
+	<string>callbackDespiteContext</string>
+	<key>gestureByPhase</key>
+	<string>observerStrategyOrigin</string>
+</dict>
+</plist>

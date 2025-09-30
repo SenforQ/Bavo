@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>completerDecoratorScale</key>
+	<string>consultativeBehaviorResponse</string>
+	<key>inheritedConstraintPressure</key>
+	<string>unsortedCoordinatorBottom</string>
+	<key>logarithmLayerMode</key>
+	<string>dependencyInsideActivity</string>
+	<key>movementCycleFormat</key>
+	<string>basicTextTop</string>
+	<key>opaqueSkirtAlignment</key>
+	<string>ternaryFormPosition</string>
+	<key>permanentProgressbarKind</key>
+	<string>signatureScopeRotation</string>
+</dict>
+</plist>

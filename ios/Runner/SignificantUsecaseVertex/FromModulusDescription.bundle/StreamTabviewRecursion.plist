@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aspectratioOperationTransparency</key>
+	<string>hashPerScope</string>
+	<key>compositionalInteractorInteraction</key>
+	<string>lossThanCommand</string>
+	<key>cupertinoClipperCenter</key>
+	<string>fragmentDecoratorTheme</string>
+	<key>equipmentByFacade</key>
+	<string>menuObserverSpeed</string>
+	<key>specifyTabviewEdge</key>
+	<string>appbarStateIndex</string>
+	<key>timerEnvironmentDepth</key>
+	<string>diversifiedCallbackType</string>
+	<key>variantCommandValidation</key>
+	<string>globalHeapBottom</string>
+</dict>
+</plist>
