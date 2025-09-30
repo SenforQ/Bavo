@@ -109,7 +109,7 @@ PODS:
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
     - FlutterMacOS
-  - WebViewJavascriptBridge (6.0.3)
+  - WebViewJavascriptBridge (7.0.0)
 
 DEPENDENCIES:
   - Adjust (~> 4.31.0)
@@ -130,7 +130,7 @@ DEPENDENCIES:
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
   - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
-  - WebViewJavascriptBridge
+  - WebViewJavascriptBridge (from `https://github.com/stury/WebViewJavascriptBridge.git`, branch `master`)
 
 SPEC REPOS:
   trunk:
@@ -151,7 +151,6 @@ SPEC REPOS:
     - KeychainSwift
     - nanopb
     - PromisesObjC
-    - WebViewJavascriptBridge
 
 EXTERNAL SOURCES:
   app_tracking_transparency:
@@ -178,6 +177,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/wakelock_plus/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
+  WebViewJavascriptBridge:
+    :branch: master
+    :git: https://github.com/stury/WebViewJavascriptBridge.git
+
+CHECKOUT OPTIONS:
+  WebViewJavascriptBridge:
+    :commit: 627cd086e42a1f7deb00d10d1d60db0293d51241
+    :git: https://github.com/stury/WebViewJavascriptBridge.git
 
 SPEC CHECKSUMS:
   Adjust: 8d4c9da5bb1d161db5d35dd091e34a641c9511ef
@@ -209,8 +216,8 @@ SPEC CHECKSUMS:
   video_player_avfoundation: 2cef49524dd1f16c5300b9cd6efd9611ce03639b
   wakelock_plus: e29112ab3ef0b318e58cfa5c32326458be66b556
   webview_flutter_wkwebview: 1821ceac936eba6f7984d89a9f3bcb4dea99ebb2
-  WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
+  WebViewJavascriptBridge: 31111973095ed8d340ca56c3abdd1ec5cad9f6c4
 
-PODFILE CHECKSUM: 7299f0b869eb02e8ea028330d03a262a0c83159f
+PODFILE CHECKSUM: a725ede9b86f4c8b35a6ac1cc855e7c369ec9ba0
 
 COCOAPODS: 1.16.2
