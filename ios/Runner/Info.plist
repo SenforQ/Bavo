@@ -37,6 +37,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>dingtalk</string>
@@ -65,8 +67,6 @@
 	<array/>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This app would like to track you across apps and websites to provide personalized content and ads.</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
