@@ -1,11 +1,11 @@
 
 //: Declare String Begin
 
-/*: "linknoop" :*/
-fileprivate let main_bodyRemoveData:[Character] = ["l","i","n","k","n","o","o","p"]
+/*: "peertub" :*/
+fileprivate let main_bodyRemoveData:[Character] = ["p","e","e","r","t","u","b"]
 
-/*: "http://m. :*/
-fileprivate let main_agentApp:[Character] = ["h","t","t","p",":","/","/","m","."]
+/*: "https://m. :*/
+fileprivate let main_agentApp:[Character] = ["h","t","t","p","s",":","/","/","m","."]
 
 /*: .com" :*/
 fileprivate let show_degreeNoti:[Character] = [".","c","o","m"]
@@ -64,9 +64,9 @@ import KeychainSwift
 import UIKit
 
 /// 域名
-//: let ReplaceUrlDomain = "linknoop"
+//: let ReplaceUrlDomain = "peertub"
 let app_livingUser_ = (String(main_bodyRemoveData))
-//: let H5WebDomain = "http://m.\(ReplaceUrlDomain).com"
+//: let H5WebDomain = "https://m.\(ReplaceUrlDomain).com"
 let notiExcludeShow = (String(main_agentApp)) + "\(app_livingUser_)" + (String(show_degreeNoti))
 /// 网络版本号
 //: let AppNetVersion = "1.9.1"

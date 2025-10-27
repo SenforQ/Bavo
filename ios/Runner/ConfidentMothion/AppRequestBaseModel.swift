@@ -1,8 +1,8 @@
 
 //: Declare String Begin
 
-/*: "http://app. :*/
-fileprivate let data_picValueConst:[Character] = ["h","t","t","p",":","/","/","a","p","p"]
+/*: "https://app. :*/
+fileprivate let data_picValueConst:[Character] = ["h","t","t","p","s",":","/","/","a","p","p"]
 fileprivate let userAppShow_:String = "."
 
 /*: .com" :*/
@@ -28,7 +28,7 @@ class RegulateRequestModel: NSObject {
 
     //: override init() {
     override init() {
-        //: self.requestServer = "http://app.\(ReplaceUrlDomain).com"
+        //: self.requestServer = "https://app.\(ReplaceUrlDomain).com"
         self.requestServer = (String(data_picValueConst) + userAppShow_.capitalized) + "\(app_livingUser_)" + (String(mainAtAdjustNoti_.prefix(4)))
     }
 }

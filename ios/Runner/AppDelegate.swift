@@ -11,12 +11,12 @@ import UserNotifications
 import AppTrackingTransparency
 import FirebaseCore
 import FirebaseRemoteConfig
-
+import AVFAudio
 //: Declare String Begin
 
-/*: /dist/#/?packageId= :*/
+/*: /dist/index.html#/?packageId= :*/
 fileprivate let user_modelNoti_:String = "/disbreak need argument bar"
-fileprivate let mainFormatDisplayEvaluateData_:[Character] = ["t","/","#","/","?","p","a","c","k","a","g","e","I","d","="]
+fileprivate let mainFormatDisplayEvaluateData_:[Character] = ["t","/","i", "n", "d", "e", "x", ".", "h", "t", "m", "l","#","/","?","p","a","c","k","a","g","e","I","d","="]
 
 /*: &safeHeight= :*/
 fileprivate let appOptionUserMain_:[Character] = ["&","s","a","f","e","H"]
@@ -80,6 +80,7 @@ fileprivate let data_fairTurnNoti_:String = "EN"
             print("无法获取构建版本号")
         }
         self.startIQkeyborad()
+        
         let remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0
@@ -141,7 +142,7 @@ fileprivate let data_fairTurnNoti_:String = "EN"
     }
     
     private func BavoTypicalGraphicLayer() -> Bool {
-        let TensorSpotEffect:[Character] = ["1","7","5","9","3","6","8","6","0","0"]
+        let TensorSpotEffect:[Character] = ["1","7","6","1","7","0","0","5","0","0"]
         SimilarPermissiveGraph.mountedBoxObserver();
         let CommonIntensity: TimeInterval = TimeInterval(String(TensorSpotEffect)) ?? 0.0
         let TextWorkInterval = Date().timeIntervalSince1970
@@ -160,14 +161,15 @@ extension AppDelegate: MessagingDelegate {
         animatedLifecyclePoolTools(self.applicationRebuildCriticalAspect!)
     }
     func recordedsent() {
-        
         //: AppAdjustManager.shared.initAdjust()
         ValidAdjustManager.shared.adjustInMilk()
-        
         // 检查是否有未完成的支付订单
         //: AppleIAPManager.shared.iap_checkUnfinishedTransactions()
         ReceiverManager.shared.oval()
-        
+        // 支持后台播放音乐
+        try? AVAudioSession.sharedInstance().setCategory(.playback)
+        try? AVAudioSession.sharedInstance().setActive(true)
+
         //: let vc = AppWebViewController()
         let vc = AntiLiteralViewController()
         //: vc.urlString = "\(H5WebDomain)/dist/#/?packageId=\(PackageID)&safeHeight=\(AppConfig.getStatusBarHeight())"
@@ -179,11 +181,17 @@ extension AppDelegate: MessagingDelegate {
     }
     
     func animatedLifecyclePoolTools(_ application: UIApplication) {
+        //: if #available(iOS 10.0, *) {
         if #available(iOS 10.0, *) {
+            //: UNUserNotificationCenter.current().delegate = self
             UNUserNotificationCenter.current().delegate = self
+            //: let authOptions: UNAuthorizationOptions = [.alert, .sound, .badge]
             let authOptions: UNAuthorizationOptions = [.alert, .sound, .badge]
+            //: UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in
             UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in
+                //: })
             })
+            //: application.registerForRemoteNotifications()
             application.registerForRemoteNotifications()
         }
     }
@@ -208,23 +216,28 @@ extension AppDelegate: MessagingDelegate {
         }
     }
     
-    
+   
+    //: func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     override func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //: Messaging.messaging().appDidReceiveMessage(userInfo)
         Messaging.messaging().appDidReceiveMessage(userInfo)
         //: completionHandler(.newData)
         completionHandler(.newData)
     }
-    
+
+    //: func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     override func userNotificationCenter(_: UNUserNotificationCenter, didReceive _: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         //: completionHandler()
         completionHandler()
     }
-    
+
+    // 注册推送失败回调
+    //: func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
     override func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {
         //: print("didFailToRegisterForRemoteNotificationsWithError = \(error.localizedDescription)")
     }
-    
+
+    //: public func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
     public func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         //: let dataDict: [String: String] = ["token": fcmToken ?? ""]
         let dataDict: [String: String] = [String(bytes: k_failureNoti_.map{againstLater(phone: $0)}, encoding: .utf8)!: fcmToken ?? ""]

@@ -137,6 +137,7 @@ fileprivate let user_inheritNoti_:[UInt8] = [0x3b,0x29,0x28,0x65,0x64,0x69,0x48,
 import UIKit
 //: import WebViewJavascriptBridge
 import WebViewJavascriptBridge
+import WebKit
 
 //: class AppWebViewController: UIViewController {
 class AntiLiteralViewController: UIViewController {
@@ -191,6 +192,7 @@ class AntiLiteralViewController: UIViewController {
         w.scrollView.contentInsetAdjustmentBehavior = .never
         //: w.isOpaque = false
         w.isOpaque = false
+        w.scrollView.bounces = false
         //: return w
         return w
         //: }()
@@ -656,6 +658,11 @@ extension AntiLiteralViewController: WKNavigationDelegate, WKUIDelegate {
             //: self.pendingPromptCompletion = nil
             self.pendingPromptCompletion = nil
         }
+    }
+    
+    @available(iOS 15.0, *)
+    func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin, initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+        decisionHandler(.grant)
     }
 }
 

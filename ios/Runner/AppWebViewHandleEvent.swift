@@ -215,6 +215,7 @@ enum SecurityTextProtocol: String, HandyJSONEnum {
     case closeWebview // 关闭当前webview
     //: case openNewWebview   = "openNewWebview"     // 使用新webview打开url
     case openNewWebview // 使用新webview打开url
+    case reloadWebview    = "reloadWebview"      // 重载webView
 }
 
 //: struct JSMessageModel: HandyJSON {
@@ -384,6 +385,10 @@ extension AntiLiteralViewController {
                     //: AppWebViewController.openNewWebView(urlStr, transparency)
                     AntiLiteralViewController.regulate(urlStr, transparency, fullscreen)
                 }
+                
+            case .reloadWebview:
+                callBack(["typeName": model.typeName.rawValue])
+                self.emptyPath()
 
             //: case .getMicStatus:
             case .getMicStatus:
